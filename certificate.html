@@ -6,10 +6,20 @@
   <title>Certificate</title>
   <link rel='stylesheet' href='style/bootstrap.min.css'>
   <link rel="stylesheet" href="style/viewStyle.css">
-
+  <script>
+    window.onload = function () {
+      document.getElementById("certificateID").innerHTML = "Certificate No: " + localStorage.getItem("certificateID");
+      document.getElementById("candidateName").innerHTML = localStorage.getItem("candidateName");
+      document.getElementById("courseName").innerHTML = localStorage.getItem("courseName");
+      document.getElementById("grade").innerHTML = localStorage.getItem("grade"); + " Grade"
+      document.getElementById("date").innerHTML = "Date Issued: " + localStorage.getItem("date");
+      console.log(localStorage.getItem("grade") + " Grade")
+    };
+  </script>
 </head>
 
 <body>
+ 
   <!-- partial:index.partial.html -->
 
   <body>

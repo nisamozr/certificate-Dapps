@@ -4,11 +4,12 @@ function conectemetamasc(){
     })
 
 }
-$(document).ready(function () {
+
     web3 = new Web3(ethereum);
     console.log("Connection Object: ",web3)
 
-    const contaracAddres = "0x72726A3865e5713f13F6fE92af9D2A2b29fFb945"
+    const contaracAddres ="0x09f4D7fc561Ef4435e438ddC1423b6c8093c9364"
+    //  
     const contractABI = [
         {
             "inputs": [],
@@ -82,11 +83,10 @@ $(document).ready(function () {
             "stateMutability": "nonpayable",
             "type": "function"
         }
-    ]
-
-    myContract = new web3.eth.contract(contractABI, contaracAddres);
+    ] 
+   var  myContract = new web3.eth.Contract(contractABI,contaracAddres);
     console.log('contract' , myContract)
-})
+
 
 function issueCertificate() {
     certificateID = document.getElementById("certificateID").value;
@@ -99,6 +99,22 @@ function issueCertificate() {
       .send({ from: ethereum.selectedAddress, gasLimit: "927000" }).then((txn) => {
         console.log(txn);
         alert("Certificate Issue with Number: " + certificateID);
+      })
+  }
+  function getCertificateDetails() {
+    certificateID = document.getElementById("certificateID").value;
+    myContract.methods.certificateDetails(certificateID)
+      .call({ from: ethereum.selectedAddress })
+      .then((result) => {
+        console.log(result);
+        localStorage.setItem("certificateID", certificateID);
+        localStorage.setItem("candidateName", result.candidateName);
+        localStorage.setItem("courseName", result.courseName);
+        localStorage.setItem("grade", result.grade);
+        localStorage.setItem("date", result.date);
+
+        var url = "certificate.html";
+        window.location.href = url;
       })
   }
 
